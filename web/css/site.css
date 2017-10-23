@@ -1,0 +1,13 @@
+/* Ссылка для редактирования */
+.edit-link {
+	position: absolute;
+    top: 5px;
+    right: 5px;
+	z-index: 999;
+}
+
+.edit-link a{
+	margin-right:5px;
+	font-size:1.0rem;
+	text-shadow: -1px 1px 0px rgba(255, 255, 255, 1);
+}
