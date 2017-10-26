@@ -39,19 +39,7 @@ use app\modules\multicontent\Module;
 			<?= $form->field($model, 'type_id')->dropDownList(Multicontent::getTypeArray()) ?>
 			<?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 			<?= $form->field($model, 'alias')->textInput(['maxlength' => true])->label('Алиас (!если поле не заполнено, генерируется автоматически из наименования методом транслитерации)') ?>
-			
-			<?= $form->field($model, 'date')->textInput(['maxlength' => true])->label('До конца акции осталось (часов)') ?>
-			<!--<label class="control-label" for="multicontent-date">Дата</label>-->
-			<?//= DatePicker::widget([
-				//'name' => 'Multicontent[date]', 
-				//'value' => $model->date,
-				//'options' => ['placeholder' => 'Выберите дату ...'],
-				//'pluginOptions' => [
-				//	'format' => 'yyyy-mm-dd',
-				//	'todayHighlight' => true
-				//]
-			//]); ?>
-			
+			<?= $form->field($model, 'date')->textInput(['maxlength' => true])->label('Доп поле') ?>
 			<?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
 		</div>
 		<div class="col-xs-12 col-md-4">

@@ -17,7 +17,7 @@ use app\modules\file\components\Img;
 				<?php endif; ?>
 				<div class="section8-team__person">
 					<span class="name"><?= $item->title ?></span>
-					<span class="second-name"><?= $item->title ?></span>
+					<span class="second-name"><?= $item->date ?></span>
 					<span class="position"><?= $item->teaser ?></span>
 				</div>
 			</div>

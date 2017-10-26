@@ -114,7 +114,12 @@ $.fn.pagepiling.moveTo('.section-screen__5');
         };
     });
     $(window).on('mousemove', function() {
-        if ( $('#pp-nav li:nth-child(10) a')
+        if ( $('#pp-nav li:nth-child(1) a,\
+            #pp-nav li:nth-child(3) a,\
+            #pp-nav li:nth-child(5) a,\
+            #pp-nav li:nth-child(6) a,\
+            #pp-nav li:nth-child(8) a,\
+            #pp-nav li:nth-child(10) a')
             .hasClass('active') ) {
             iconShare.removeClass('active');
         } else {

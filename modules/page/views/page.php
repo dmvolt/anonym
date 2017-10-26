@@ -4,21 +4,34 @@ use app\components\helpers\Text;
 use app\components\helpers\Language;
 
 use app\modules\infoblock\components\BlockText;
+use app\assets\PageAsset;
+use app\assets\EditPageAsset;
+
+use yii\bootstrap\Modal;
+
+if(Yii::$app->user->can('adminPanel')){
+	EditPageAsset::register($this);
+	/* AppAsset::register($this); */
+}
+else{
+	PageAsset::register($this);
+}
 ?>
+<?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="<?= Yii::$app->language ?>">
 <head>
-<meta charset="utf-8">
+<meta charset="<?= Yii::$app->charset ?>">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paper</title>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,800&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="/js/vendor/slick/slick.css">
-<link rel="stylesheet" href="/js/vendor/slick/slick-theme.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<meta name="description" content="<?= $this->params['meta_description'] ?>">
+<meta name="keywords" content="<?= $this->params['meta_keywords'] ?>">
+
+<?= Html::csrfMetaTags() ?>
+<title><?= Html::encode($this->title) ?></title>
+	
+<?php $this->head() ?>
+
 <!--<link rel="stylesheet" href="css/jquery.pagepiling.css">-->
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -39,15 +52,17 @@ use app\modules\infoblock\components\BlockText;
 
 </head>
 <body>
+<?php $this->beginBody() ?>
+<?= $this->params['siteinfo']->counter ?>
     
 <div class="bacgraund-fon"></div>
 <div class="fixed-top__menu" style="position: fixed;">
-	<div class="column hd-2 logo-paper"><a href="index.html" class="logo-main"></a></div>
+	<div class="column hd-2 logo-paper"><a href="<?= Yii::$app->homeUrl ?>" class="logo-main"></a></div>
 	<div class="column hd-7 lg-6 sm-6">
 		<div class="burg-butt burg-butt2">
             <div id="bbt" onclick="openbox('box'); return false" class="buef buef2"></div>
         </div>
-		<ul class="main-top__menu main-top__menu-paper paper-adap"  id="box" style="display: none;">
+		<ul class="main-top__menu main-top__menu-paper paper-adap" id="box" style="display: none;">
 			<!--<li><a href="#">проект</a></li>
 			<li><a href="#">экономика</a></li>
 			<li><a href="#">дорожная карта</a></li>
@@ -79,9 +94,9 @@ use app\modules\infoblock\components\BlockText;
 		
 	</div>
 	<!--<div class="column hd-2 lg-3 sm-2"><a href="#" class="btn btn-pagin">Whitepaper</a></div>-->
-	<div class="column hd-1 lg-1 sm-2 text-right btn-lang-paper"><a href="#" class="btn-lang">Rus</a></div>
+	<!--<div class="column hd-1 lg-1 sm-2 text-right btn-lang-paper"><a href="#" class="btn-lang">Rus</a></div>-->
 	
-	<div id="#lang" class="column hd-1 lg-1 sm-2 text-right whitepap-lang dropdown">
+	<div id="#lang" class="column hd-1 lg-1 sm-2 text-right btn-lang-paper dropdown">
 		<span><a href="#" class="btn-lang hida"><?= Language::getLanguageName($this->params['lang_id']) ?></a></span>
 		<div class="mutliSelect">
 			<ul style="display:none;" class="langv">
@@ -190,7 +205,7 @@ use app\modules\infoblock\components\BlockText;
       <div id="m111"  data-id="m1" class="content-width">
          <div class="menu-block-paper">
             <span><?= BlockText::_('whitepaper-2_0', $lang_id, 'text', '1. введение') ?></span>
-            <p>
+			<?= BlockText::_('whitepaper-2_1', $lang_id, 'html', '<p>
                Представьте, что где - то в медиапространстве есть закрытый ресурс, в
 				котором собираются для общения открытые, неординарные и развитые люди.
 			</p>
@@ -212,14 +227,14 @@ use app\modules\infoblock\components\BlockText;
                ">
                Хотели бы Вы оказаться в таком месте?<br>
 Стать частью приватного сообщества?
-            </p>
+            </p>') ?>
             <div class="border-bottom-paper"></div>
          </div>
       </div>
       <div id="m22" data-id="m2" class="content-width">
          <div class="menu-block-paper">
             <span><?= BlockText::_('whitepaper-3_0', $lang_id, 'text', '2.	АНОНИМ') ?></span>
-            <p>
+			<?= BlockText::_('whitepaper-3_1', $lang_id, 'html', '<p>
                Добро пожаловать в сеть Аноним!
             </p>
             <p>
@@ -247,7 +262,7 @@ use app\modules\infoblock\components\BlockText;
 Здесь принято быть собой, общаясь без масок и социальных ярлыков.<br>
 Здесь возможно обрести единомышленников, проявлять свободомыслие и<br>
 самое главное - себя.
-            </p>
+            </p>') ?>
             <div class="img-paper">
                <img src="/img/img-ff.jpg">
             </div>
@@ -259,7 +274,7 @@ use app\modules\infoblock\components\BlockText;
       <div id="m33" data-id="m3" class="content-width">
          <div class="menu-block-paper">
             <span><?= BlockText::_('whitepaper-4_0', $lang_id, 'text', '3. ПОЧЕМУ МЫ') ?></span>
-            <p>
+			<?= BlockText::_('whitepaper-4_1', $lang_id, 'html', '<p>
                <strong>• Свобода выражения.</strong><br>
                Свобода мыслить и говорить вне зависимости от того, что сказано и кем.
             </p>
@@ -295,14 +310,14 @@ use app\modules\infoblock\components\BlockText;
                <strong>• Наличие грамотной модерации.</strong><br>
                Система выявляет вредоносный контент методом фиксации «стоп слов»
 без раскрытия личности пользователя.
-            </p>
+            </p>') ?>
             <div class="border-bottom-paper"></div>
          </div>
       </div>
       <div id="m44" data-id="m4" class="content-width">
          <div class="menu-block-paper">
             <span><?= BlockText::_('whitepaper-5_0', $lang_id, 'text', '4. ДЛЯ КОГО СОЗДАНА СЕТЬ?') ?></span>
-            <p>
+			<?= BlockText::_('whitepaper-5_1', $lang_id, 'html', '<p>
                - Для тех, кто готов делиться познавательными историями, новостями и
 мыслями с другими пользователями свободно и без социальных барьеров и
 предрассудков.
@@ -326,14 +341,14 @@ use app\modules\infoblock\components\BlockText;
             	Аноним — <strong>это единство.</strong><br>
             	Аноним — <strong>это гласность.</strong><br>
             	Аноним — <strong> это свобода.</strong>
-            </p>
+            </p>') ?>
             <div class="border-bottom-paper"></div>
          </div>
       </div>
       <div id="m55" data-id="m5" class="content-width">
          <div class="menu-block-paper">
-            <span>5. ЗАЧЕМ СОЗДАНА СЕТЬ?</span>
-            <p>
+            <span><?= BlockText::_('whitepaper-6_0', $lang_id, 'text', '5. ЗАЧЕМ СОЗДАНА СЕТЬ?') ?></span>
+			<?= BlockText::_('whitepaper-6_1', $lang_id, 'html', '<p>
                Наша цель в создании приватного сообщества продвинутых людей с высоким
 уровнем взаимного доверия и понимания. Людей с более высокой степенью
 развития и осознанности. 
@@ -351,14 +366,14 @@ use app\modules\infoblock\components\BlockText;
             </p>
             <p>
                Кто знает, возможно Аноним сможет повлиять на ход истории?
-            </p>
+            </p>') ?>
             <div class="border-bottom-paper"></div>
          </div>
       </div>
       <div id="m66" data-id="m6" class="content-width">
          <div class="menu-block-paper">
-            <span>6. ЧТО МЫ УЖЕ СДЕЛАЛИ</span>
-            <p>
+            <span><?= BlockText::_('whitepaper-7_0', $lang_id, 'text', '6. ЧТО МЫ УЖЕ СДЕЛАЛИ') ?></span>
+			<?= BlockText::_('whitepaper-7_1', $lang_id, 'html', '<p>
                Первая рабочая версия сети Аноним была опубликована в Play Market и APP
 				Store в ноябре 2016 года. Проект был запущен с минимальным набором
 				функций (новостная лента историй от анонимных пользователей, анонимный
@@ -377,19 +392,22 @@ use app\modules\infoblock\components\BlockText;
             </p>
             <p>
                На сегодняшний день выпущено более 80 обновлений.
-            </p>
-            <span style="text-transform: none;">Метрики на 3 квартал 2017 года</span>
+            </p>') ?>
+            
+            <span style="text-transform: none;"><?= BlockText::_('whitepaper-7_2', $lang_id, 'text', 'Метрики на 3 квартал 2017 года') ?></span>
             <div class="img-paper">
-               <img src="img/gghh.png">
+               <img src="/img/gghh.png">
             </div>
-            <p>
+			<?= BlockText::_('whitepaper-7_3', $lang_id, 'html', '<p>
             	Наша стратегия была направлена на проверку гипотезы живучести и
 востребованности сети, поэтому мы не вкладывались в продвижение и
 маркетинг. Ставка была сделана на сарафанное радио и органический
 прирост. Рекламный бюджет составил 0 рублей.
-            </p>
-            <span>ОБНОВЛЕНИЕ 2.0</span>
-            <p>
+            </p>') ?>
+            
+            <span><?= BlockText::_('whitepaper-7_4', $lang_id, 'text', 'ОБНОВЛЕНИЕ 2.0') ?></span>
+			
+			<?= BlockText::_('whitepaper-7_5', $lang_id, 'html', '<p>
             	В октябре 2017 года мы готовимся к обновлению сети Аноним версии 2.0. с
 переработанной архитектурой и функциональностью приложения.
             </p>
@@ -430,14 +448,14 @@ use app\modules\infoblock\components\BlockText;
 Анониме будет ограничена. Попасть в сеть будет возможно только по
 приглашению от пользователей, либо по приобретенному инвайту
 (условному приглашению) на внутренней бирже сети Анонима.
-            </p>
+            </p>') ?>
             <div class="border-bottom-paper"></div>
          </div>
       </div>
       <div id="m77" data-id="m7" class="content-width">
          <div class="menu-block-paper">
-            <span>7. ЧТО МЫ ХОТИМ СДЕЛАТЬ</span>
-            <p>
+            <span><?= BlockText::_('whitepaper-8_0', $lang_id, 'text', '7. ЧТО МЫ ХОТИМ СДЕЛАТЬ') ?></span>
+			<?= BlockText::_('whitepaper-8_1', $lang_id, 'html', '<p>
                В ближайшем будущем мы планируем создать закрытую экосистему сети
 Аноним, позволяющую существовать сообществу максимально автономно на
 столько, на сколько это возможно.
@@ -505,14 +523,14 @@ use app\modules\infoblock\components\BlockText;
 Каньоне или Луне, в образе Дарта Вейдера и т.д. Эти функции призваны
 открыть потенциал для творчества и развития технологии в данном
 направлении.
-            </p>
+            </p>') ?>
             <div class="border-bottom-paper"></div>
          </div>
       </div>
       <div id="m88" data-id="m8" class="content-width">
          <div class="menu-block-paper">
-            <span>8.	АНОНИМНЫЙ БЛОКЧЕЙН</span>
-            <p>
+            <span><?= BlockText::_('whitepaper-9_0', $lang_id, 'text', '8.	АНОНИМНЫЙ БЛОКЧЕЙН') ?></span>
+			<?= BlockText::_('whitepaper-9_1', $lang_id, 'html', '<p>
                В начале 2017 года вышло обновление сети Аноним с новым функционалом и
 внутренней монетизацией. Последняя позволяла пользователям получать
 цифровые монетки сети Аноним за полезные действия. Система
@@ -541,7 +559,7 @@ Market и APP Store.
 конструктивном решении проблемы хранения конфиденциальных данных с
 помощью блокчейн технологии, а именно разработки собственного блокчейн
 решения для сети Аноним, для хранения данных в зашифрованном виде.
-            </p>
+            </p>') ?>
            <!-- <div class="teble-paper" style="margin-top: 40px;margin-bottom: 105px;">
                <div class="top-paperf">
                   Требуемые инвестиций в размере <strong>1500K</strong> USD:
@@ -649,8 +667,8 @@ Market и APP Store.
       </div>
       <div id="m99" data-id="m9" class="content-width">
          <div class="menu-block-paper">
-         	<span>9. АНОНИМНАЯ МОДЕЛЬ МОНЕТИЗАЦИИ</span>
-         	<p>
+         	<span><?= BlockText::_('whitepaper-10_0', $lang_id, 'text', '9. АНОНИМНАЯ МОДЕЛЬ МОНЕТИЗАЦИИ') ?></span>
+			<?= BlockText::_('whitepaper-10_1', $lang_id, 'html', '<p>
          		Сеть Аноним была создана на общественных началах и не является
 коммерческим проектом. Это полностью авторская идея.
 Именно поэтому в приложении нет рекламы. Это фундаментальный принцип
@@ -671,13 +689,13 @@ Market и APP Store.
 развитие приватных локальных сообществ и способствовать взаимодействию
 между пользователями посредством поощрения качественно созданного
 контента. Для этой цели было придумано вознаграждение токенами.
-         	</p>
+         	</p>') ?>
          </div>
      </div>
      <div id="m101" data-id="m10" class="content-width">
          <div class="menu-block-paper">
-         	<span>10. ТОКЕН АНОНИМ</span>
-         	<p>
+         	<span><?= BlockText::_('whitepaper-11_0', $lang_id, 'text', '10. ТОКЕН АНОНИМ') ?></span>
+			<?= BlockText::_('whitepaper-11_1', $lang_id, 'html', '<p>
          		Токен - это символьный идентификатор.<br>
          		<strong>
          			Токен Anonym выпущен на платформе Ethereum.<br>
@@ -699,23 +717,23 @@ Market и APP Store.
 Пользователи сети Аноним могут получать токены за полезные совершенные
 действия. Например, за создание и публикацию контента, а также за
 модерацию постов и администрирование каналов и групп в сети Аноним.
-         	</p>
+         	</p>') ?>
          	<div class="img-paper">
-               <img src="img/ds2.png">
+               <img src="/img/ds2.png">
             </div>
-            <span>ВОЗНАГРАЖДЕНИЕ<br>УЧАСТНИКОВ СЕТИ АНОНИМ</span>
-         	<p>
+            <span><?= BlockText::_('whitepaper-11_2', $lang_id, 'text', 'ВОЗНАГРАЖДЕНИЕ<br>УЧАСТНИКОВ СЕТИ АНОНИМ') ?></span>
+			<?= BlockText::_('whitepaper-11_3', $lang_id, 'html', '<p>
          		Схема вознаграждения токенами пользователя за создание
 и публикацию контента
-         	</p>
+         	</p>') ?>
          	<div class="img-paper">
-               <img src="img/gh3.png">
+               <img src="/img/gh3.png">
             </div>
-            <span>СХЕМА РАБОТЫ БИРЖИ ИНВАЙТОВ</span>
+            <span><?= BlockText::_('whitepaper-11_4', $lang_id, 'text', 'СХЕМА РАБОТЫ БИРЖИ ИНВАЙТОВ') ?></span>
          	<div class="img-paper">
-               <img src="img/gh4.png">
+               <img src="/img/gh4.png">
             </div>
-         	<p>
+			<?= BlockText::_('whitepaper-11_5', $lang_id, 'html', '<p>
          		- Инвайт могут сгенерировать только держатели токенов, с объемом более
 1000 токенов и выставить на обмен на внутренней бирже сети Аноним.
          	</p>
@@ -732,12 +750,7 @@ Market и APP Store.
          	<p>
          		- Мы предоставляем инвайты всем, кто вкладывается в проект в дополнение к
 токенам, которые они получают.
-         	</p>
-         	
-         	
-            
-
-
+         	</p>') ?>
          </div>
      </div>
      <div id="m112" data-id="m11" class="content-width">
@@ -747,11 +760,8 @@ Market и APP Store.
      </div>
      <div id="m123" data-id="m12" class="content-width">
          <div class="menu-block-paper">
-         	<span>
-            	ЧТО ПОЛУЧАЮТ ВЛАДЕЛЬЦЫ
-ТОКЕНОВ?
-            </span>
-            <p>
+         	<span><?= BlockText::_('whitepaper-13_0', $lang_id, 'text', 'ЧТО ПОЛУЧАЮТ ВЛАДЕЛЬЦЫ ТОКЕНОВ?') ?></span>
+			<?= BlockText::_('whitepaper-13_1', $lang_id, 'html', '<p>
             	- Держатели токенов имеют 50% скидку на весь цифровой контент сети
 Аноним.
             </p>
@@ -762,12 +772,10 @@ Market и APP Store.
             	- Команда обязуется использовать 30% чистой прибыли на выкуп токенов <strong>X 2
 от рыночной стоимости,</strong> для поддержания рыночной стоимости токена
 Anonym.
-            </p>
-            <span>
-            	ОСОБЫЕ ВОЗМОЖНОСТИ ДЛЯ
-ДЕРЖАТЕЛЕЙ БОЛЕЕ 1000 ТОКЕНОВ
-            </span>
-            <p>
+            </p>') ?>
+            
+            <span><?= BlockText::_('whitepaper-13_2', $lang_id, 'text', 'ОСОБЫЕ ВОЗМОЖНОСТИ ДЛЯ ДЕРЖАТЕЛЕЙ БОЛЕЕ 1000 ТОКЕНОВ') ?></span>
+			<?= BlockText::_('whitepaper-13_3', $lang_id, 'html', '<p>
             	-Держатели токенов (с объемом >= 1000 токенов) могут создавать инвайты
 пропорционально количеству имеющихся токенов, токены при этом не
 сгорают, остаются в полном объеме у держателя токенов. Инвайты можно
@@ -778,13 +786,10 @@ Anonym.
 *Механика получения работы инвайтов описана в разделе схема
 работы биржи инвайтов.
 </strong>
-            </p>
-            <span>
-
-         		НАГЛЯДНАЯ ВЫГОДА ДЛЯ ДЕРЖАТЕЛЕЙ
-		ТОКЕНОВ:
-		         	</span>
-		         	<p>
+            </p>') ?>
+            
+            <span><?= BlockText::_('whitepaper-13_4', $lang_id, 'text', 'НАГЛЯДНАЯ ВЫГОДА ДЛЯ ДЕРЖАТЕЛЕЙ ТОКЕНОВ:') ?></span>
+			<?= BlockText::_('whitepaper-13_5', $lang_id, 'html', '<p>
 		         		Пример:
 		         	</p>
 		         	<p>
@@ -808,60 +813,54 @@ Anonym.
 		         		Выгода:<br>
 		10 инвайтов = от 200$ до 500$ ежемесячно (токены при этом не сгорают они
 		идут в дополнение к токенам. Инвайты генерируются только раз в месяц).
-		         	</p>
-            
-            
-         	
+		         	</p>') ?>
          </div>
      </div>
      <div id="m134" data-id="m13" class="content-width">
          <div class="menu-block-paper">
-         	<span>
-         		ПЕРВООЧЕРЕДНЫЕ ЭТАПЫ РАЗВИТИЯ
-         	</span>
+         	<span><?= BlockText::_('whitepaper-14_0', $lang_id, 'text', 'ПЕРВООЧЕРЕДНЫЕ ЭТАПЫ РАЗВИТИЯ') ?></span>
          	<div class="img-paper">
-               <img src="img/gh5.png">
+               <img src="/img/gh5.png">
             </div>
-            <p>
+			<?= BlockText::_('whitepaper-14_1', $lang_id, 'html', '<p>
             	Реализацию запланированных функций, можно отслеживать по мере выпуска
 обновлений сети Аноним.
-            </p>
-            <div class="img-paper">
-               <img src="img/gh6.png">
-            </div>
+            </p>') ?>
             
+            <div class="img-paper">
+               <img src="/img/gh6.png">
+            </div>
          </div>
-     </div>->
+     </div>
      <div id="m145" data-id="m14" class="content-width">
          <div class="menu-block-paper">
          	<div class="img-paper">
-               <img src="img/gh7.png">
+               <img src="/img/gh7.png">
             </div>
          </div>
      </div>
      <div id="m156" data-id="m15" class="content-width">
          <div class="menu-block-paper">
-         	<span>
-            	ИНВЕСТИЦИИ pre-OPEN TOKEN SALE <br>
-            	<small style="font-size: 16px;">(15.10.17 - 10.11.17)</small>
+         	<span><?= BlockText::_('whitepaper-16_0', $lang_id, 'text', 'ИНВЕСТИЦИИ pre-OPEN TOKEN SALE') ?>
+            	 <br>
+            	<small style="font-size: 16px;"><?= BlockText::_('whitepaper-16_1', $lang_id, 'text', '(15.10.17 - 10.11.17)') ?></small>
             </span>
              <div class="img-paper">
-               <img src="img/gh8.png">
+               <img src="/img/gh8.png">
             </div>
-            <span>
-            	ИНВЕСТИЦИИ pre-OPEN TOKEN SALE <br>
-            	<small style="font-size: 16px;">(25.11.17 - 25.12.17)</small>
+            <span><?= BlockText::_('whitepaper-16_2', $lang_id, 'text', 'ИНВЕСТИЦИИ pre-OPEN TOKEN SALE') ?>
+            	 <br>
+            	<small style="font-size: 16px;"><?= BlockText::_('whitepaper-16_3', $lang_id, 'text', '(25.11.17 - 25.12.17)') ?></small>
             </span>
              <div class="img-paper">
-               <img src="img/gh9.png">
+               <img src="/img/gh9.png">
             </div>
          </div>
      </div>
      <div id="m167" data-id="m16" class="content-width">
          <div class="menu-block-paper">
-         	<span>ГАРАНТИИ СОХРАННОСТИ
-ПРИВЛЕЧЕННЫХ СРЕДСТВ</span>
-<p>
+         	<span><?= BlockText::_('whitepaper-17_0', $lang_id, 'text', 'ГАРАНТИИ СОХРАННОСТИ ПРИВЛЕЧЕННЫХ СРЕДСТВ') ?></span>
+			<?= BlockText::_('whitepaper-17_1', $lang_id, 'html', '<p>
 	- Международный эскроу, кошелек с цифровыми активами будет открываться
 только при наличии одновременно трёх подписей из четырёх, две из которых
 принадлежат юристам.
@@ -874,13 +873,13 @@ Anonym.
 </p>
 <p>
 	- Ежемесячная публичная отчетность о доходах и расходах.
-</p>
+</p>') ?>
          </div>
      </div>
      <div id="m178" data-id="m17" class="content-width">
          <div class="menu-block-paper">
-         	<span>ЮРИДИЧЕСКИЕ ОСОБЕННОСТИ</span>
-<p>
+         	<span><?= BlockText::_('whitepaper-18_0', $lang_id, 'text', 'ЮРИДИЧЕСКИЕ ОСОБЕННОСТИ') ?></span>
+			<?= BlockText::_('whitepaper-18_1', $lang_id, 'html', '<p>
 	Покупатели токенов не являются инвесторам, а токен инвестицией.
 </p>
 <p>
@@ -928,15 +927,13 @@ expectation of profits derived solely or predominantly from the efforts of other
 	Благодаря такому юридическому статусу, токен можно легально купить и
 продать как за крипто-активы, так и за фиатные деньги, в том числе
 гражданам США и Китая.
-</p>
+</p>') ?>
          </div>
      </div>
      <div id="m189" data-id="m18" class="content-width">
          <div class="menu-block-paper">
-         	<span>
-	КОМАНДА СЕТИ АНОНИМ
-</span>
-<p>
+         	<span><?= BlockText::_('whitepaper-19_0', $lang_id, 'text', 'КОМАНДА СЕТИ АНОНИМ') ?></span>
+			<?= BlockText::_('whitepaper-19_1', $lang_id, 'html', '<p>
 	<strong>Че Стас -</strong>
 	 Автор проекта, Архитектор Анонима
 реализация проектов совместно со СберТех, Роцид, ИРИ (kiberбезопасность)
@@ -994,15 +991,13 @@ team leader собственной команды APP разработки с 20
 </p>
 <p>
 	<strong>Константин Куксин -</strong>frontend developer
-</p>
-
-
+</p>') ?>
          </div>
      </div>
       <div id="m190" data-id="m19" class="content-width">
          <div class="menu-block-paper">
-         	<span>СООБЩЕСТВО АНОНИМ</span>
-			<p>
+         	<span><?= BlockText::_('whitepaper-20_0', $lang_id, 'text', 'СООБЩЕСТВО АНОНИМ') ?></span>
+			<?= BlockText::_('whitepaper-20_1', $lang_id, 'html', '<p>
 				Более 70 участников волонтерского движения насчитывает сеть Аноним на
 			сегодняшний день.
 			</p>
@@ -1016,36 +1011,34 @@ team leader собственной команды APP разработки с 20
 			<p>
 				Только вместе, объединенные одним смыслом и целью, мы сможем создавать
 			великие дела.
-			</p>
+			</p>') ?>
          </div>
      </div>
      <div id="m191" data-id="m20" class="content-width">
          <div class="menu-block-paper">
-         	<span>ССЫЛКИ НА СКАЧИВАНИЕ</span>
+         	<span><?= BlockText::_('whitepaper-21_0', $lang_id, 'text', 'ССЫЛКИ НА СКАЧИВАНИЕ') ?></span>
          	<p>
-         		<strong>Google Play:</strong>
+         		<strong><?= BlockText::_('whitepaper-21_1', $lang_id, 'text', 'Google Play:') ?></strong>
          	</p>
          	<p>
          		<a href="https://play.google.com/store/apps/details?id=com.appache.anonimka">
-         			Скачать
+         			<?= BlockText::_('whitepaper-21_2', $lang_id, 'text', 'Скачать') ?>
          		</a>
          	</p>
          	<p>
-         		<strong>App Store:</strong>
+         		<strong><?= BlockText::_('whitepaper-21_3', $lang_id, 'text', 'App Store:') ?></strong>
          	</p>
          	<p>
          		<a href="https://itunes.apple.com/us/app/%D0%B0%D0%BD%D0%BE%D0%BD%">
-         			Скачать
+         			<?= BlockText::_('whitepaper-21_4', $lang_id, 'text', 'Скачать') ?>
          		</a>
          	</p>
          </div>
      </div>
      <div id="m192" data-id="m21" class="content-width">
          <div class="menu-block-paper">
-         	<span>
-				ЗАКЛЮЧЕНИЕ
-			</span>
-			<p>
+         	<span><?= BlockText::_('whitepaper-22_0', $lang_id, 'text', 'ЗАКЛЮЧЕНИЕ') ?></span>
+			<?= BlockText::_('whitepaper-22_1', $lang_id, 'html', '<p>
 				Мы искренне хотим, чтобы у людей появилось место, где они могут открыться
 			без страха перед обществом, без стеснения общепринятыми рамками.
 			</p>
@@ -1058,7 +1051,7 @@ team leader собственной команды APP разработки с 20
 			</p>
 			<p style="font-size: 30px; margin-bottom: 55px;">
 				Ну что… Ты с нами?
-			</p>
+			</p>') ?>
          </div>
      </div>
    </section>
@@ -1108,10 +1101,16 @@ team leader собственной команды APP разработки с 20
 	});
 </script>
 
-<script src="/js/vendor/slick/slick.min.js"></script>
-<script src="/js/jquery.pagepiling.min.js"></script>
-<script src="/js/main.js"></script>
 <!-- Scripts END -->
-
+<?php if(Yii::$app->user->can('adminPanel')):?>
+	<?php Modal::begin([
+		'id' => 'modal_edit',
+		'size' => 'modal-lg',
+	]); ?>
+	<div class="modal-body-content"></div>
+	<?php Modal::end(); ?>
+<?php endif; ?>
+<?php $this->endBody() ?>
 </body>
 </html>
+<?php $this->endPage() ?>
