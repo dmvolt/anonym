@@ -7,7 +7,7 @@ use app\modules\file\components\Img;
 <!-- Гаранты -->
 <?php if ($multicontent): ?>
 	<?php foreach($multicontent as $key => $item): ?>
-		<div class="column hd-3">
+		<div class="column hd-3 md-4 sm-6 sto">
 			<div class="section8-team__box">
 				<?= Text::_edit($item->id, 'multicontent', true) ?> <!-- Ссылка на редактирование материала -->
 				<?php if($item->thumb):?>

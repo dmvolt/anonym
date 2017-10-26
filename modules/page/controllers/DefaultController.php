@@ -48,7 +48,8 @@ class DefaultController extends FrontendController
 			}
 			/******************** /SEO ***********************/
 			
-			return $this->render('/page', ['page' => $page]);
+			/* return $this->render('/page', ['page' => $page]); */
+			return Yii::$app->view->renderFile('@app/modules/page/views/page.php', ['page' => $page, 'lang_id' => $this->lang_id]);
 			
         } else {
             throw new NotFoundHttpException('404 Страница не найдена.');

@@ -1,5 +1,7 @@
 <?php
 return [
+	'FRONT_BALOON_1' => 'Use the scroll',
+	
 	'FRONT_BUTTON_1' => 'Participate in ICO',
 	'FRONT_BUTTON_2' => 'Learn more',
 	'FRONT_BUTTON_3' => 'Load more',
@@ -11,10 +13,10 @@ return [
 	'FRONT_MAIN_MENU_TEXT_3' => 'Road map',
 	'FRONT_MAIN_MENU_TEXT_4' => 'Command',
 	
-	'FRONT_MAIN_MENU_LINK_1' => '#block1',
-	'FRONT_MAIN_MENU_LINK_2' => '#block2',
-	'FRONT_MAIN_MENU_LINK_3' => '#block3',
-	'FRONT_MAIN_MENU_LINK_4' => '#block4',
+	'FRONT_MAIN_MENU_LINK_1' => '3',
+	'FRONT_MAIN_MENU_LINK_2' => '7',
+	'FRONT_MAIN_MENU_LINK_3' => '8',
+	'FRONT_MAIN_MENU_LINK_4' => '9',
 	
 	'FRONT_SOCIAL_MENU_TEXT_1' => 'Facebook.com/Anonym',
 	'FRONT_SOCIAL_MENU_TEXT_2' => 'Vk.com/Anonym',

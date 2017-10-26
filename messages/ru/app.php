@@ -1,5 +1,7 @@
 <?php
 return [
+	'FRONT_BALOON_1' => 'Используйте скролл',
+	
 	'FRONT_BUTTON_1' => 'Учавствовать в ICO',
 	'FRONT_BUTTON_2' => 'Узнать больше',
 	'FRONT_BUTTON_3' => 'Загрузить еще',
@@ -11,10 +13,10 @@ return [
 	'FRONT_MAIN_MENU_TEXT_3' => 'Дорожная карта',
 	'FRONT_MAIN_MENU_TEXT_4' => 'Команда',
 	
-	'FRONT_MAIN_MENU_LINK_1' => '#block1',
-	'FRONT_MAIN_MENU_LINK_2' => '#block2',
-	'FRONT_MAIN_MENU_LINK_3' => '#block3',
-	'FRONT_MAIN_MENU_LINK_4' => '#block4',
+	'FRONT_MAIN_MENU_LINK_1' => '3',
+	'FRONT_MAIN_MENU_LINK_2' => '7',
+	'FRONT_MAIN_MENU_LINK_3' => '8',
+	'FRONT_MAIN_MENU_LINK_4' => '9',
 	
 	'FRONT_SOCIAL_MENU_TEXT_1' => 'Facebook.com/Anonym',
 	'FRONT_SOCIAL_MENU_TEXT_2' => 'Vk.com/Anonym',

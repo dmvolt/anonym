@@ -66,17 +66,21 @@ class DefaultController extends BackendController
     /**
      * Fast Update in Popup window
      */
-    public function actionUpdateFast($id)
+    public function actionUpdateFast($id, $type = 'text')
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save())
         {
+			$cache_key = $model->alias.'_'.$model->lang_id;
+			// Очищаем кэш.
+			Yii::$app->cache->delete($cache_key);
+			
             return $this->redirect([Yii::$app->request->post('popup_edit_redirect')]); // Возвращаемся на предыдущую страницу
         }
         else
         {
-            return $this->renderAjax('/backend/update-fast', [
+            return $this->renderAjax('/backend/update-fast-'.$type, [
                 'model' => $model,
             ]);
         }
@@ -93,6 +97,11 @@ class DefaultController extends BackendController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			
+			$cache_key = $model->alias.'_'.$model->lang_id;
+			// Очищаем кэш.
+			Yii::$app->cache->delete($cache_key);
+			
             return $this->redirect(['index']);
         } else {
             return $this->render('/backend/update', [
@@ -110,6 +119,10 @@ class DefaultController extends BackendController
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+		
+		// Очищаем кэш.
+		Yii::$app->cache->flush();
+			
         return $this->redirect(['index']);
     }
 
@@ -123,6 +136,9 @@ class DefaultController extends BackendController
         {
             if($arrKey AND is_array($arrKey) AND count($arrKey)>0)
             {
+				// Очищаем кэш.
+				Yii::$app->cache->flush();
+		
                 foreach($arrKey as $id)
                 {
                     $this->findModel($id)->delete();
@@ -134,6 +150,9 @@ class DefaultController extends BackendController
         {
             if($multiedit AND is_array($multiedit) AND count($multiedit)>0)
             {
+				// Очищаем кэш.
+				Yii::$app->cache->flush();
+		
                 foreach($multiedit as $id => $field)
                 {
                     if($model = $this->findModelForMultiAction($id))

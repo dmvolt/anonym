@@ -1,23 +1,72 @@
+
+
+
+
+
+
+
+
 $(document).ready(function() {
 
     // Full Page Scroll
     $('#fullPage').pagepiling({
         sectionsColor: [],
+        afterLoad: function(anchorLink, index){
+
+                    $('.imit-click').removeClass('active-imit');
+                    $('.imit-click[data-id='+index+']').addClass('active-imit');
+             },
+        onLeave: function (prev, next) {
+            if(prev === 1) {
+                setTimeout(function(){
+                    $('.section-screen__1anime').addClass('classname-0');
+                }, 1000);
+            } else if(next === 1) {
+                $('.section-screen__1anime').removeClass('classname-0');
+            }
+            // create a jQuery event
+            e = $.Event('mousemove');
+
+            // set coordinates
+            e.pageX = 1000;
+            e.pageY = 1000;
+
+// trigger event - must trigger on document
+			$(document).trigger(e);
+            /*$('section').addClass('locked-scroll');
+            setTimeout(function(){
+                $('section').removeClass('locked-scroll');
+            }, 1000);*/
+
+        }, 
+        scrollingSpeed: 300,
         navigation: {
             'position': 'left',
             'textColor': '#e7ebf2',
             'bulletsColor': '#e7ebf2',
-            'tooltips': ['Screen 1', 'Screen 2', 'Screen 3', 'Screen 4', 'Screen 5', 'Screen 6', 'Screen 7', 'Screen 8', 'Screen 9']
+            'tooltips': ['Home', 'УЧАСТВУЙТЕ В ICO', 'АНОНИМНАЯ АНТИСОЦИАЛЬНАЯ СЕТЬ', 'Что уже сделанно', 'Что планируется сделать?', 'ПРОЕКТ', 'ОТКРЫТАЯ ПРОДАЖА ТОКЕНОВ СЕТИ', 'ДОРОЖНАЯ КАРТА', 'КОМАНДА', 'СВЯЗАТЬСЯ С НАМИ'],
+             
+            
         }
     });
 
-    // Change Menu Color
+
+
+$.fn.pagepiling.moveTo('.section-screen__5');
+
+
+
+
+ // Change Menu Color
     var iconShare = $('.icon-share'),
         iconStep = $('.icon-step');
 
     $(window).on('mousemove', function() {
+
         if ( $('#pp-nav li:nth-child(1) a,\
-                #pp-nav li:nth-child(7) a').hasClass('active') ) {
+                #pp-nav li:nth-child(5) a,\
+                #pp-nav li:nth-child(8) a'
+                ).hasClass('active') ) {
             $('.fixed-top__menu').removeClass('black');
         } else {
             $('.fixed-top__menu').addClass('black');
@@ -26,21 +75,24 @@ $(document).ready(function() {
 
     $(window).on('mousemove', function() {
         if ( $('#pp-nav li:nth-child(2) a,\
-                #pp-nav li:nth-child(5) a,\
+                #pp-nav li:nth-child(4) a,\
                 #pp-nav li:nth-child(6) a,\
-                #pp-nav li:nth-child(8) a,\
-                #pp-nav li:nth-child(9) a').hasClass('active') ) {
+                #pp-nav li:nth-child(7) a,\
+                #pp-nav li:nth-child(9) a,\
+                #pp-nav li:nth-child(10) a').hasClass('active') ) {
             $('.logo-main').addClass('active');
         } else {
             $('.logo-main').removeClass('active');
         };
     });
 
+
     $(window).on('mousemove', function() {
         if ( $('#pp-nav li:nth-child(2) a,\
-                #pp-nav li:nth-child(5) a,\
+                #pp-nav li:nth-child(4) a,\
                 #pp-nav li:nth-child(6) a,\
-                #pp-nav li:nth-child(8) a').hasClass('active') ) {
+                #pp-nav li:nth-child(9) a,\
+                #pp-nav li:nth-child(7) a').hasClass('active') ) {
             $('.btn-lang').addClass('active');
         } else {
             $('.btn-lang').removeClass('active');
@@ -49,8 +101,11 @@ $(document).ready(function() {
 
     $(window).on('mousemove', function() {
         if ( $('#pp-nav li:nth-child(2) a,\
-                #pp-nav li:nth-child(6) a,\
-                #pp-nav li:nth-child(8) a').hasClass('active') ) {
+                #pp-nav li:nth-child(7) a,\
+                #pp-nav li:nth-child(4) a,\
+                #pp-nav li:nth-child(9) a,\
+                #pp-nav li:nth-child(10) a')
+            .hasClass('active') ) {
             iconShare.addClass('active');
             iconStep.addClass('active');
         } else {
@@ -58,32 +113,64 @@ $(document).ready(function() {
             iconStep.removeClass('active');
         };
     });
-
-    // Parallax Screen
-    const boxer = boxercontainer.querySelector("img"),
-    maxMove = boxercontainer.offsetWidth / 30,
-    boxerCenterX = boxer.offsetLeft + (boxer.offsetWidth / 2),
-    boxerCenterY = boxer.offsetTop + (boxer.offsetHeight / 2),
-    fluidboxer = window.matchMedia("(min-width: 726px)");
-
-    function getMousePos(xRef, yRef) {
-      
-      let panelRect = boxercontainer.getBoundingClientRect();
-      return {
-          x: Math.floor(xRef - panelRect.left) /(panelRect.right-panelRect.left)*boxercontainer.offsetWidth,
-          y: Math.floor(yRef - panelRect.top) / (panelRect.bottom -panelRect.top) * boxercontainer.offsetHeight
+    $(window).on('mousemove', function() {
+        if ( $('#pp-nav li:nth-child(10) a')
+            .hasClass('active') ) {
+            iconShare.removeClass('active');
+        } else {
+            iconShare.addClass('active');
         };
-    }
-
-    document.body.addEventListener("mousemove", function(e) {
-      let mousePos = getMousePos(e.clientX, e.clientY),
-      distX = mousePos.x - boxerCenterX,
-      distY = mousePos.y - boxerCenterY;
-      if (Math.abs(distX) < 500 && distY < 200 && fluidboxer.matches) {
-      boxer.style.transform = "translate("+(-1*distX)/12+"px,"+(-1*distY)/12+"px)";
-        boxercontainer.style.backgroundPosition = `calc(50% + ${distX/50}px) calc(50% + ${distY/50}px)`;
-      }
     });
+
+/*
+const colors = function() {
+    if ( $('#pp-nav li:nth-child(1) a,\
+                #pp-nav li:nth-child(5) a,\
+                #pp-nav li:nth-child(8) a'
+                ).hasClass('active') ) {
+            $('.fixed-top__menu').removeClass('black');
+        } else {
+            $('.fixed-top__menu').addClass('black');
+        };
+        if ( $('#pp-nav li:nth-child(2) a,\
+                #pp-nav li:nth-child(4) a,\
+                #pp-nav li:nth-child(6) a,\
+                #pp-nav li:nth-child(7) a,\
+                #pp-nav li:nth-child(9) a,\
+                #pp-nav li:nth-child(10) a').hasClass('active') ) {
+            $('.logo-main').addClass('active');
+        } else {
+            $('.logo-main').removeClass('active');
+        };
+        if ( $('#pp-nav li:nth-child(2) a,\
+                #pp-nav li:nth-child(4) a,\
+                #pp-nav li:nth-child(6) a,\
+                #pp-nav li:nth-child(9) a,\
+                #pp-nav li:nth-child(7) a').hasClass('active') ) {
+            $('.btn-lang').addClass('active');
+        } else {
+            $('.btn-lang').removeClass('active');
+        };
+        if ( $('#pp-nav li:nth-child(2) a,\
+                #pp-nav li:nth-child(7) a,\
+                #pp-nav li:nth-child(7) a').hasClass('active') ) {
+            iconShare.addClass('active');
+            iconStep.addClass('active');
+        } else {
+            iconShare.removeClass('active');
+            iconStep.removeClass('active');
+        };
+}*/
+
+   
+    
+
+
+    // if ( $('#pp-nav li a[data-tooltip="Page 1"]').hasClass('active') ) {
+    //     $('.fixed-top__menu').addClass('black');
+    // } else {
+    //     $('.fixed-top__menu').removeClass('black');
+    // }
 
     // Slider
     $('.slider').slick({
@@ -152,3 +239,98 @@ $(document).ready(function() {
     });
 
 });
+
+
+
+
+
+$(".dropdown span a").on('click', function() {
+  $(".dropdown  ul").slideToggle('fast');
+});
+
+$(".dropdown  ul li a").on('click', function() {
+  $(".dropdown  ul").hide();
+});
+
+function getSelectedValue(id) {
+  return $("#" + id).find("span a span.value").html();
+}
+
+$(document).bind('click', function(e) {
+  var $clicked = $(e.target);
+  if (!$clicked.parents().hasClass("dropdown")) $(".dropdown  ul").hide();
+});
+
+$('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+    title = $(this).val() + ",";
+
+  if ($(this).is(':checked')) {
+    var html = '<span title="' + title + '">' + title + '</span>';
+    $('.multiSel').append(html);
+    $(".hida").hide();
+  } else {
+    $('span[title="' + title + '"]').remove();
+    var ret = $(".hida");
+    $('.dropdown span a').append(ret);
+
+  }
+});
+
+
+
+$(document).ready(function () {
+
+        $('.no-scroll-pagepiling').scroll(function (e) {
+            chk_scroll(e, function (direction) {
+                if (!direction)
+                    $.fn.pagepiling.moveSectionUp();
+                else
+                    $.fn.pagepiling.moveSectionDown();
+            });
+        });
+
+        function chk_scroll(e, callback) {
+            var elem = $(e.currentTarget);
+            if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
+                callback(1);
+            }else if (elem.scrollTop() === 0){
+               callback(0);
+            }
+        }
+
+        $('.imit-click').click(function () {
+            var it = Number($(this).data('id'));
+            $.fn.pagepiling.moveTo(it);
+        });
+
+//        $('.no-scroll-pagepiling').hover(function () {
+//            $.fn.pagepiling.setAllowScrolling(false);
+//        }, function () {
+//            $.fn.pagepiling.setAllowScrolling(true);
+//        });
+//
+//        $('.no-scroll-pagepiling').scroll(function () {
+//
+//            console.log( $(this).scrollTop(), $(this).height() );
+//            if ((Number($(this).prop("scrollHeight") - $(this).innerHeight()) == Number($(this).scrollTop())) || Number($(this).scrollTop()) == 0) {
+//                $.fn.pagepiling.setAllowScrolling(true);
+//            } else {
+//                $.fn.pagepiling.setAllowScrolling(false);
+//            }
+//        });
+
+        $('.icon-step').click(function () {
+            $.fn.pagepiling.moveSectionDown();
+        });
+
+    });
+
+
+    $("#bbt").click(function () {
+        $("#bbt").toggleClass("activ-burg");
+    });
+    $("#lang").click(function () {
+        $("#lang").toggleClass("activ-lang");
+    });

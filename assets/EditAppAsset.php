@@ -15,13 +15,12 @@ class EditAppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-		/* 'js/vendor/fancybox/jquery.fancybox.css', */
-		
 		'css/main.css',
 		'css/font-awesome/css/font-awesome.min.css',
 		'js/vendor/slick/slick.css',
 		'js/vendor/slick/slick-theme.css',
 		'css/jquery.pagepiling.css',
+		'css/style.css',
 		'css/site.css',
     ];
 	

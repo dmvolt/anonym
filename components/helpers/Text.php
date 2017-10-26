@@ -111,13 +111,13 @@ class Text
 		{
 			/***************************** Ссылка на редактирование в админку ***********************************/
 			$link .= '<p class="edit-link">';
-			$link .= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true">', '/admin/'.$module.'/update?id='.$id, ['target' => '_blank', 'title' => 'Редактировать']);
+			$link .= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', '/admin/'.$module.'/update?id='.$id, ['target' => '_blank', 'title' => 'Редактировать']);
 			$link .= '</p>';
 		}
 		return $link;
 	}
 	
-	public static function _edit($id = 0, $module = 'main', $is_del_button = false)
+	public static function _edit($id = 0, $module = 'main', $type = 'text', $is_del_button = false)
 	{
 		$link = '';
 
@@ -144,11 +144,11 @@ JS;
 			Yii::$app->view->registerJs($script, yii\web\View::POS_READY);
 
 			/***************************** Ссылка на редактирование в админку ***********************************/
-			//$link .= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true">', '/admin/'.$module.'/update?id='.$id, ['target' => '_blank', 'title' => 'Редактировать']);
+			//$link .= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', '/admin/'.$module.'/update?id='.$id, ['target' => '_blank', 'title' => 'Редактировать']);
 
 			/***************************** Ссылка на редактирование в popup окно ***********************************/
 			$link .= '<p class="edit-link">';
-			$link .= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', '#', ['class' => 'popup-edit-link', 'data-target' => '/admin/'.$module.'/update-fast?id='.$id, 'title' => 'Редактировать']);
+			$link .= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', '#', ['class' => 'popup-edit-link', 'data-target' => '/admin/'.$module.'/update-fast?id='.$id.'&type='.$type, 'title' => 'Редактировать']);
 			
 			if($is_del_button)
 			{

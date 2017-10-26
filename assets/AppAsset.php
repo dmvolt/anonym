@@ -23,6 +23,7 @@ class AppAsset extends AssetBundle
 		'js/vendor/slick/slick.css',
 		'js/vendor/slick/slick-theme.css',
 		'css/jquery.pagepiling.css',
+		'css/style.css',
 		'css/site.css',
     ];
 	

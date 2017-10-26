@@ -7,8 +7,8 @@ use app\modules\file\components\Img;
 <!-- Отзывы -->
 <?php if ($multicontent): ?>
 	<?php foreach($multicontent as $key => $item): ?>
-	
-		<div class="column hd-4">
+
+		<div class="column hd-4 md-6 lg-6 sm-6 xs-12">
 			<div class="section4-response__box">
 				<?= Text::_edit($item->id, 'multicontent', true) ?> <!-- Ссылка на редактирование материала -->
 				<div class="image"><span>Г</span></div>

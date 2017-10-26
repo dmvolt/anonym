@@ -6,29 +6,29 @@ use app\components\helpers\ArrayHelper;
 
 class Language
 {
-	public static function getLanguageName($type_id = 1, $field = 'name')
+	public static function getLanguageName($lang_id = 1, $field = 'name')
     {
 		$lang_arr = self::getLanguages();
-        return (isset($lang_arr[$type_id][$field]))? $lang_arr[$type_id][$field]: '';
+        return (isset($lang_arr[$lang_id][$field]))? $lang_arr[$lang_id][$field]: '';
     }
 	
 	public static function getLanguages()
     {
         return [
 			1 => [
-				'name' => 'Русский',
+				'name' => 'Rus',
 				'iso' => 'ru-RU',
 			],
 			2 => [
-				'name' => 'English',
+				'name' => 'Eng',
 				'iso' => 'en-EN',
 			],
 			3 => [
-				'name' => 'Japan',
+				'name' => 'Jp',
 				'iso' => 'ja-JP',
 			],
 			4 => [
-				'name' => 'China',
+				'name' => 'Zh',
 				'iso' => 'zh-CN',
 			],
         ];

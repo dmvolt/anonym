@@ -111,8 +111,7 @@ $config = [
                 'user/<_a:[\w\-]+>' => 'user/default/<_a>',
 				
 				// Страницы Page
-				/* '<alias:[\w\-]+>' => 'page/default/index', */
-				'<alias:(contacts)>' => 'page/default/index',
+				'<alias:[\w\-]+>' => 'page/default/index',
 				
 				// Правила по умолчанию
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<_a:[\w-]+>' => '<_m>/<_c>/<_a>',
