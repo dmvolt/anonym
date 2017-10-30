@@ -49,14 +49,14 @@ use yii\helpers\Url;
 
 <section class="section section-screen__1 section-screen__1anime  pp-scrollable">
 	<div class="block-trd">
-		<div class="anim-efect"></div>
+		<div class="anim-efect"></div>background-image: url(../img/fontt.png);
 	</div>
 	<div class="fon-paral">
 		<div class="text-papf">
 			<div class="fon-paral2"></div>
 			<div class="parallax-wrapper">
 				<ul id="scene">
-					<div data-depth="0.1" class="fon-lwadt bg bg-1 layer"></div>
+					<div data-depth="0.1" class="fon-lwadt bg bg-<?= $lang_id ?> layer"></div>
 				</ul>
 			</div>
 		</div>

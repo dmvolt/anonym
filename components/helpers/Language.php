@@ -23,14 +23,14 @@ class Language
 				'name' => 'Eng',
 				'iso' => 'en-EN',
 			],
-			3 => [
+			/* 3 => [
 				'name' => 'Jp',
 				'iso' => 'ja-JP',
 			],
 			4 => [
 				'name' => 'Zh',
 				'iso' => 'zh-CN',
-			],
+			], */
         ];
     }
 }

@@ -341,7 +341,7 @@
     padding-top: 170px
 }
 .fon-lwadt {
-    background-image: url(../img/fontt.png);
+    /* background-image: url(../img/fontt.png); */
     width: 100%;
     position: absolute!important;
     background-position: 49% 56%;
@@ -2221,4 +2221,32 @@
 .section5-bottom__layout .title:before,
 .section5-top__layout .title:before {
     content: ""
+}
+
+.bg-1 {
+    background-image: url(../img/fontt-1.png);
+}
+
+.bg-2 {
+    background-image: url(../img/fontt-2.png);
+}
+
+.bg-3 {
+    background-image: url(../img/fontt-3.png);
+}
+
+.bg-4 {
+    background-image: url(../img/fontt-4.png);
+}
+
+.bg-5 {
+    background-image: url(../img/fontt-5.png);
+}
+
+.bg-6 {
+    background-image: url(../img/fontt-6.png);
+}
+
+.bg-7 {
+    background-image: url(../img/fontt-7.png);
 }
